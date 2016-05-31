@@ -5,7 +5,7 @@ app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
-app.get('/webhook/', function (req, res) {
+app.get('/webhook', function (req, res) {
   if (req.query['hub.verify_token'] === 'a_bot_is_a_bot') {
     res.send(req.query['hub.challenge']);
   }
