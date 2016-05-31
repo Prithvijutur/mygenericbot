@@ -25,6 +25,29 @@ app.post('/webhook/', function (req, res) {
   res.sendStatus(200);
 });
 
+var token = "EAAV2q4QDamwBAPsGMMIThUTX2RbKGZCt3leiZAcVxmi0a6Ldzx4E9U6GIHGybb8Ap33n6iXooHJVaA7sefcPpHSxa5HKAaxHV8FBOCqHj7cZBIkYbNO8pNUVABGT9kbMCHSIEAQCRdaPJ9ov5bf8ZC8iEsOhuSXNN8uB1ZBXr4QZDZD";
+
+function sendTextMessage(sender, text) {
+  messageData = {
+    text:text
+  }
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:token},
+    method: 'POST',
+    json: {
+      recipient: {id:sender},
+      message: messageData,
+    }
+  }, function(error, response, body) {
+    if (error) {
+      console.log('Error sending message: ', error);
+    } else if (response.body.error) {
+      console.log('Error: ', response.body.error);
+    }
+  });
+}
+
 app.listen(process.env.OPENSHIFT_NODEJS_PORT || 80, process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1", function () {
   console.log('Example app listening on port 80!');
 });
