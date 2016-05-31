@@ -8,6 +8,7 @@ app.get('/', function (req, res) {
 app.get('/webhook', function (req, res) {
   if (req.query['hub.verify_token'] === 'a_bot_is_a_bot') {
     res.send(req.query['hub.challenge']);
+    console.log("validation token successful");
   }
   res.send('Error, wrong validation token');
 })
@@ -25,7 +26,7 @@ app.post('/webhook/', function (req, res) {
   res.sendStatus(200);
 });
 
-var token = "EAAV2q4QDamwBAPsGMMIThUTX2RbKGZCt3leiZAcVxmi0a6Ldzx4E9U6GIHGybb8Ap33n6iXooHJVaA7sefcPpHSxa5HKAaxHV8FBOCqHj7cZBIkYbNO8pNUVABGT9kbMCHSIEAQCRdaPJ9ov5bf8ZC8iEsOhuSXNN8uB1ZBXr4QZDZD";
+var token = "EAAV2q4QDamwBABUMgjZBOyGRt8d8x9qZAO27CFEfbnZAOYZADrMe2B2oHIYQvHPVZCBTZB4sJ98LqF58ZBPmFOrTzp65XYsS0ZAeCw26LukdUCD6Q9r4w8M45HKi8FWCOFdlDV0UxRZAx4rFIth1RZBv2HO1ELuD70LZC9qRf3vtotjZBAZDZD";
 
 function sendTextMessage(sender, text) {
   messageData = {
