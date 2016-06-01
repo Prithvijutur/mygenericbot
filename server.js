@@ -42,6 +42,7 @@ function sendTextMessage(sender, text) {
 }
 
 app.post('/webhook', function (req, res) {
+  console.log('length of messages is ', messaging_events.length);
   messaging_events = req.body.entry[0].messaging;
   for (i = 0; i < messaging_events.length; i++) {
     event = req.body.entry[0].messaging[i];
