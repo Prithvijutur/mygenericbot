@@ -14,8 +14,10 @@ app.get('/webhook', function (req, res) {
   if (req.query['hub.verify_token'] === 'a_bot_is_a_bot') {
     res.send(req.query['hub.challenge']);
     console.log("validation token successful");
+    res.status(200);
   }
   res.send('Error, wrong validation token');
+  res.status(401);
 })
 
 function sendTextMessage(sender, text) {
