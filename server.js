@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 
 // index
 app.get('/', function (req, res) {
-  res.send('hello world i am a secret bot')
+  res.send('I live to serve, my master')
 })
 
 // for facebook verification
@@ -121,7 +121,6 @@ function sendGenericMessage(sender) {
   })
 }
 
-// spin spin sugar
-app.listen(app.get('port'), function() {
-  console.log('running on port', app.get('port'))
-})
+app.listen(process.env.OPENSHIFT_NODEJS_PORT || 80, process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1", function () {
+  console.log('Example app listening on port 80!');
+});
