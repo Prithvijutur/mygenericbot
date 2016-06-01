@@ -1,9 +1,9 @@
 'use strict'
 
-const express = require('express')
-const bodyParser = require('body-parser')
-const request = require('request')
-const app = express()
+var express = require('express')
+var bodyParser = require('body-parser')
+var request = require('request')
+var app = express()
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -28,12 +28,12 @@ app.get('/webhook/', function (req, res) {
 
 // to post data
 app.post('/webhook/', function (req, res) {
-  let messaging_events = req.body.entry[0].messaging
-  for (let i = 0; i < messaging_events.length; i++) {
-    let event = req.body.entry[0].messaging[i]
-    let sender = event.sender.id
+  var messaging_events = req.body.entry[0].messaging
+  for (var i = 0; i < messaging_events.length; i++) {
+    var event = req.body.entry[0].messaging[i]
+    var sender = event.sender.id
     if (event.message && event.message.text) {
-      let text = event.message.text
+      var text = event.message.text
       if (text === 'Generic') {
         sendGenericMessage(sender)
         continue
@@ -41,7 +41,7 @@ app.post('/webhook/', function (req, res) {
       sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
     }
     if (event.postback) {
-      let text = JSON.stringify(event.postback)
+      var text = JSON.stringify(event.postback)
       sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
       continue
     }
@@ -53,7 +53,7 @@ app.post('/webhook/', function (req, res) {
 const token = "EAAV2q4QDamwBANjMWinZC46BjVpu91AaK2C7jpttWrYgsupKRc2nAqSpmRsgLqcDxjiRWEu8pFC9DmujczuLbWExoL7xz9nsFNrBhsjbMgAqCgD3uRbVM3GxMNBpYSp3xMePnkQea7F2E6yQF87hIsR1nHThuP3Fj27fFTgZDZD"
 
 function sendTextMessage(sender, text) {
-  let messageData = { text:text }
+  var messageData = { text:text }
   
   request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -73,7 +73,7 @@ function sendTextMessage(sender, text) {
 }
 
 function sendGenericMessage(sender) {
-  let messageData = {
+  var messageData = {
     "attachment": {
       "type": "template",
       "payload": {
